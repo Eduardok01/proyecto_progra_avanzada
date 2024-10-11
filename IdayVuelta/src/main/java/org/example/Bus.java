@@ -1,7 +1,7 @@
 package org.example;
 
 import java.util.List;
-
+//hola
 public class Bus {
 
 	private String idBus;
