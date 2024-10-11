@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.Asiento;
 
+//Hola
+
 public class Pasaje {
 
 	private String idPasaje;
