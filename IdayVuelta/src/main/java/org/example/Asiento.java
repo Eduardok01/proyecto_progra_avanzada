@@ -5,9 +5,8 @@ public class Asiento {
     private int numeroAsiento;
     private Boolean estado;
 
-    public Asiento(int numeroAsiento, Boolean estado) {
+    public Asiento(int numeroAsiento) {
         this.numeroAsiento = numeroAsiento;
-        this.estado = estado;
     }
 
     public int getNumeroAsiento() {

@@ -1,3 +1,6 @@
+package org.example;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +21,7 @@ public class Bus {
 	public List<Asiento> verificarDisponibilidadAsientos() {
 		List<Asiento> asientosDisponibles = new ArrayList<>();
 		for (Asiento asiento : listaAsientos) {
-			if (!asiento.isOcupado()) {
+			if (!asiento.getEstado()) {
 				asientosDisponibles.add(asiento);
 			}
 		}
@@ -28,7 +31,7 @@ public class Bus {
 	public Asiento asignarAsiento(int numeroAsiento) {
 		if (numeroAsiento > 0 && numeroAsiento <= capacidad) {
 			Asiento asiento = listaAsientos.get(numeroAsiento - 1);
-			if (!asiento.isOcupado()) {
+			if (!asiento.getEstado()) {
 				asiento.reservarAsiento();
 				return asiento;
 			} else {
