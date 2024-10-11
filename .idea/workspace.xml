@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ea938a9-5487-4bc4-9a87-54c6276f735f" name="Changes" comment="Cambios clase Viaje" />
+    <list default="true" id="4ea938a9-5487-4bc4-9a87-54c6276f735f" name="Changes" comment="Cambios clase Viaje">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdayVuelta/src/main/java/org/example/Ciudad.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdayVuelta/src/main/java/org/example/Ciudad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/IdayVuelta/src/main/java/org/example/Viaje.java" beforeDir="false" afterPath="$PROJECT_DIR$/IdayVuelta/src/main/java/org/example/Viaje.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -18,10 +23,10 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2n9pQHwove7nDRsNPojDvDyMC9n" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -30,7 +35,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ftr__clase__viaje__1008",
+    "git-widget-placeholder": "ftr__agayoso__javadocs",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -58,6 +63,7 @@
       <option name="presentableId" value="Default" />
       <updated>1728395130261</updated>
       <workItem from="1728395131598" duration="2273000" />
+      <workItem from="1728672805298" duration="1231000" />
     </task>
     <task id="LOCAL-00001" summary="Cambios clase Viaje">
       <option name="closed" value="true" />
