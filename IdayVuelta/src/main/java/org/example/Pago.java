@@ -2,6 +2,11 @@ package org.example;
 
 import java.util.Date;
 
+/**
+ * @author Eduardo Krause
+ * @return contructor
+ * es el constructor del objeto
+ */
 public class Pago {
 
 	private String idPago;
