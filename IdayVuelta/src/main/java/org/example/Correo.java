@@ -59,7 +59,6 @@ public class Correo {
 			System.out.println("Enviando correo a: " + destinatario);
 			System.out.println("Asunto: " + asunto);
 			System.out.println("Contenido: \n" + contenido);
-			// Lógica real de envío de correo se puede implementar aquí
 		} else {
 			System.out.println("Dirección de correo inválida.");
 		}

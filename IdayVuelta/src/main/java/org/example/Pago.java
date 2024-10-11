@@ -3,9 +3,8 @@ package org.example;
 import java.util.Date;
 
 /**
+ * Clase que representa lo relacionado con el pago.
  * @author Eduardo Krause
- * @return contructor
- * es el constructor del objeto
  */
 public class Pago {
 
@@ -14,6 +13,15 @@ public class Pago {
 	private String metodoPago;
 	private Date fechaPago;
 
+	/**
+	 * Es el constructor del objeto
+	 *
+	 * @param idPago id del pago
+	 * @param monto monto del pago
+	 * @param metodoPago metodo del pago
+	 * @param fechaPago fecha del pago
+	 *@return contructor
+	 */
 	public Pago(String idPago, Double monto, String metodoPago, Date fechaPago){
 		this.idPago = idPago;
 		this.monto = monto;
