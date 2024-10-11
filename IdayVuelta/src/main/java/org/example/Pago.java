@@ -17,6 +17,11 @@ public class Pago {
 
 	}
 
+	/**
+	 * @author Eduardo Krause
+	 * @return object data
+	 *
+	 */
 	public String getIdPago() {
 		return idPago;
 	}
@@ -24,7 +29,10 @@ public class Pago {
 	public void setIdPago(String idPago) {
 		this.idPago = idPago;
 	}
-
+	/**
+	 * @author Eduardo Krause
+	 * @return object data
+	 */
 	public Double getMonto() {
 		return monto;
 	}
@@ -32,7 +40,10 @@ public class Pago {
 	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
-
+	/**
+	 * @author Eduardo Krause
+	 * @return object data
+	 */
 	public String getMetodoPago() {
 		return metodoPago;
 	}
@@ -40,7 +51,10 @@ public class Pago {
 	public void setMetodoPago(String metodoPago) {
 		this.metodoPago = metodoPago;
 	}
-
+	/**
+	 * @author Eduardo Krause
+	 * @return object data
+	 */
 	public Date getFechaPago() {
 		return fechaPago;
 	}
@@ -50,12 +64,12 @@ public class Pago {
 	}
 
 
-
-
-
-
-
-
+	/**
+	 * @author Eduardo Krause
+	 * @param pago
+	 * @return boolean
+	 * este metodo revisa el procesamiento del pago del boleto
+	 */
 	public boolean procesarPago(Pago pago) {
 		//throw new UnsupportedOperationException();
 		if(verificarPago(pago)){
@@ -70,6 +84,13 @@ public class Pago {
 
 	}
 
+	/**
+	 * @author Eduardo Krause
+	 * @param pago
+	 * @return boolean
+	 * este metodo se encarga de verificar la existencia correcta del pago,
+	 *
+	 */
 	public boolean verificarPago(Pago pago) {
 		//throw new UnsupportedOperationException();
 		if(pago.getMonto() > 0){
