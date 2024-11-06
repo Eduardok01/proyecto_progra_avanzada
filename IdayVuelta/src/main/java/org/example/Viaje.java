@@ -140,15 +140,25 @@ public class Viaje {
 
 	/**
 	 * Actualiza la disponibilidad de los asientos del viaje.
-	 *
+	 * <p>
 	 * Este método aún no está implementado.
 	 *
 	 * @return una lista de asientos disponibles.
 	 * @throws UnsupportedOperationException si el método no está implementado.
 	 */
 	public List<Asiento> actualizarDisponibilidad() {
-		// TODO - implement Viaje.actualizarDisponibilidad
-		throw new UnsupportedOperationException();
-	}
+		//verificar disponibilidad de asientos
+		List<Asiento> asientosDisponibles = bus.verificarDisponibilidadAsientos();
 
+		if (asientosDisponibles.isEmpty()) {
+			System.out.println("No hay asientos disponibles.");
+		} else {
+			System.out.print("Asientos disponibles: ");
+			for (Asiento asiento : asientosDisponibles) {
+				System.out.print(asiento.getNumeroAsiento() + " ");
+			}
+			System.out.println();
+		}
+		return asientosDisponibles;
+	}
 }

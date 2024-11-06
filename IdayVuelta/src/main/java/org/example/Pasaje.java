@@ -116,8 +116,8 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public void generarPasaje() {
-
-		throw new UnsupportedOperationException();
+		this.idPasaje = "Id-" + (int) (Math.random() * 99);
+		System.out.println("Pasaje generado: "+ idPasaje);
 	}
 
 	/**
@@ -129,8 +129,15 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public void calcularPrercio() {
-
-		throw new UnsupportedOperationException();
+		switch (tipo.toLowerCase()) {
+			case "salón cama":
+				precio = 10000f;
+				break;
+			case "semicama":
+				precio = 5000f;
+				break;
+		}
+		System.out.println("El precio del pasaje es: "+ precio);
 	}
 
 	/**
@@ -142,10 +149,11 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public void asignarAsiento() {
-
-		throw new UnsupportedOperationException();
+		if (asiento != null && !asiento.getEstado()) {
+			asiento.setEstado(true);
+			System.out.println("El asiento número " + asiento.getNumeroAsiento() + " ha sido asignado.");
+		} else {
+			System.out.println("No se puede asignar el asiento: ya está ocupado o es inválido.");
+		}
 	}
-
 }
-
-

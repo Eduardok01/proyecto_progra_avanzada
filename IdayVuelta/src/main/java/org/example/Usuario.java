@@ -14,6 +14,20 @@ public class Usuario {
 	private String email;
 
 	/**
+	 * Constructor para crear un nuevo usuario con los datos proporcionados.
+	 *@param nombre nombre del usuario.
+	 *@param rut el RUT del usuario.
+	 *@param telefono número de telefono del usuario.
+	 *@param email correo del usuario.
+	 */
+	public Usuario(String nombre, String rut, String telefono, String email) {
+		this.nombre = nombre;
+		this.rut = rut;
+		this.telefono = telefono;
+		this.email = email;
+	}
+
+	/**
 	 * Método para ingresar los datos personales del usuario.
 	 */
 	public void ingresaDatosPersonales() {
@@ -34,20 +48,8 @@ public class Usuario {
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.email = email;
-	}
 
-	/**
-	 * Crear un nuevo usuario con los datos proporcionados.
-	 *@param nombre nombre del usuario.
-	 *@param rut el RUT del usuario.
-	 *@param telefono número de telefono del usuario.
-	 *@param email correo del usuario.
-	 */
-	public Usuario(String nombre, String rut, String telefono, String email) {
-		this.nombre = nombre;
-		this.rut = rut;
-		this.telefono = telefono;
-		this.email = email;
+		System.out.println("Datos personales actualizados correctamente.");
 	}
 
 	/**
@@ -121,4 +123,5 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 }

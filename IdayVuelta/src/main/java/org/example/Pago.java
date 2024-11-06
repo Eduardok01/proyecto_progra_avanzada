@@ -93,8 +93,6 @@ public class Pago {
 			System.out.println("Error en los detalles del pago");
 			return false;
 		}
-		
-
 	}
 
 	/**
@@ -113,9 +111,4 @@ public class Pago {
 
 		}return false;
 	}
-
-
-
-
-
 }

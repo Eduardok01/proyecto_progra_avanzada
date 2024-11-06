@@ -19,6 +19,7 @@ public class Asiento {
      */
     public Asiento(int numeroAsiento) {
         this.numeroAsiento = numeroAsiento;
+        this.estado = false;
     }
 
     /**
@@ -64,8 +65,11 @@ public class Asiento {
      * @throws UnsupportedOperationException Método no implementado.
      */
     public Boolean reservarAsiento() {
-        // TODO - implementar la lógica para reservar el asiento
-        throw new UnsupportedOperationException();
+        if (!estado) {
+            estado = true;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -74,7 +78,6 @@ public class Asiento {
      * @throws UnsupportedOperationException Método no implementado.
      */
     public void liberarAsiento() {
-        // TODO - implementar la lógica para liberar el asiento
-        throw new UnsupportedOperationException();
+        estado = false;
     }
 }
