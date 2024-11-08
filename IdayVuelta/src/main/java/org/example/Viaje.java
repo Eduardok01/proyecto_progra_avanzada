@@ -1,6 +1,5 @@
 package org.example;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
@@ -18,105 +17,6 @@ public class Viaje {
 	private LocalTime horaSalida;
 	private Bus bus;
 
-	/**
-	 * Obtiene la ciudad de origen del viaje.
-	 *
-	 * @return la ciudad de origen del viaje.
-	 */
-	public Ciudad getOrigen() {
-		return origen;
-	}
-
-	/**
-	 * Establece la ciudad de origen del viaje.
-	 *
-	 * @param origen la ciudad de origen.
-	 */
-	public void setOrigen(Ciudad origen) {
-		this.origen = origen;
-	}
-
-	/**
-	 * Obtiene la ciudad de destino del viaje.
-	 *
-	 * @return la ciudad de destino del viaje.
-	 */
-	public Ciudad getDestino() {
-		return destino;
-	}
-
-	/**
-	 * Establece la ciudad de destino del viaje.
-	 *
-	 * @param destino la ciudad de destino.
-	 */
-	public void setDestino(Ciudad destino) {
-		this.destino = destino;
-	}
-
-	/**
-	 * Obtiene la fecha de salida del viaje.
-	 *
-	 * @return la fecha de salida del viaje.
-	 */
-	public Date getFechaSalida() {
-		return fechaSalida;
-	}
-
-	/**
-	 * Establece la fecha de salida del viaje.
-	 *
-	 * @param fechaSalida la fecha de salida del viaje.
-	 */
-	public void setFechaSalida(Date fechaSalida) {
-		this.fechaSalida = fechaSalida;
-	}
-
-	/**
-	 * Obtiene la hora de salida del viaje.
-	 *
-	 * @return la hora de salida del viaje.
-	 */
-	public LocalTime getHoraSalida() {
-		return horaSalida;
-	}
-
-	/**
-	 * Establece la hora de salida del viaje.
-	 *
-	 * @param horaSalida la hora de salida del viaje.
-	 */
-	public void setHoraSalida(LocalTime horaSalida) {
-		this.horaSalida = horaSalida;
-	}
-
-	/**
-	 * Obtiene el bus asignado al viaje.
-	 *
-	 * @return el bus asignado al viaje.
-	 */
-	public Bus getBus() {
-		return bus;
-	}
-
-	/**
-	 * Establece el bus asignado al viaje.
-	 *
-	 * @param bus el bus asignado.
-	 */
-	public void setBus(Bus bus) {
-		this.bus = bus;
-	}
-
-	/**
-	 * Crea una nueva instancia de la clase Viaje con los detalles del origen, destino, fecha y hora de salida, y el bus.
-	 *
-	 * @param origen      la ciudad de origen del viaje.
-	 * @param destino     la ciudad de destino del viaje.
-	 * @param fechaSalida la fecha de salida del viaje.
-	 * @param horaSalida  la hora de salida del viaje.
-	 * @param bus         el bus asignado al viaje.
-	 */
 	public Viaje(Ciudad origen, Ciudad destino, Date fechaSalida, LocalTime horaSalida, Bus bus) {
 		this.origen = origen;
 		this.destino = destino;
@@ -125,41 +25,43 @@ public class Viaje {
 		this.bus = bus;
 	}
 
-	/**
-	 * Imprime en consola los detalles del viaje, incluyendo la ciudad de origen, la ciudad de destino, la fecha y hora de salida.
-	 */
-	public void consultarViaje() {
-
-		System.out.println("Datos del viaje:\n");
-
-		System.out.println("Origen: " + this.origen.getNombreCiudad());
-		System.out.println("Destino: " + this.destino.getNombreCiudad());
-		System.out.println("Fecha Salida: " + this.fechaSalida);
-		System.out.println("Hora Salida: " + this.horaSalida);
-
+	public Ciudad getOrigen() {
+		return origen;
 	}
 
-	/**
-	 * Actualiza la disponibilidad de los asientos del viaje.
-	 * <p>
-	 * Este método aún no está implementado.
-	 *
-	 * @return una lista de asientos disponibles.
-	 * @throws UnsupportedOperationException si el método no está implementado.
-	 */
-	public List<Asiento> actualizarDisponibilidad() {
-		//verificar disponibilidad de asientos
-		List<Asiento> asientosDisponibles = bus.verificarDisponibilidadAsientos();
+	public Ciudad getDestino() {
+		return destino;
+	}
 
-		if (asientosDisponibles.isEmpty()) {
-			System.out.println("No hay asientos disponibles.");
-		} else {
-			System.out.print("Asientos disponibles: ");
-			for (Asiento asiento : asientosDisponibles) {
-				System.out.print(asiento.getNumeroAsiento() + " ");
+	public Date getFechaSalida() {
+		return fechaSalida;
+	}
+
+	public LocalTime getHoraSalida() {
+		return horaSalida;
+	}
+
+	public Bus getBus() {
+		return bus;
+	}
+
+	public List<Asiento> obtenerAsientosDisponibles() {
+		return this.bus.obtenerAsientosDisponibles();
+	}
+
+	public boolean reservarAsiento(int numeroAsiento, Usuario usuario) {
+		boolean flag = false;
+
+		Asiento asiento = this.bus.obtenerAsientoPorNumero(numeroAsiento);
+
+		if (asiento != null) {
+			if (!asiento.isOcupado()){
+				bus.reservarAsiento(numeroAsiento, usuario);
+				flag = true;
 			}
-			System.out.println();
 		}
-		return asientosDisponibles;
+
+		return flag;
 	}
+
 }
