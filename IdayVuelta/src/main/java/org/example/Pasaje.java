@@ -61,7 +61,7 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public void cancelarPasaje(){
-		asiento.setEstado(true);
+		asiento.setEstado(false);
 		this.usuario = null;
 		this.idPasaje = null;
 		System.out.println("El pasaje ha sido cancelado");
@@ -128,7 +128,7 @@ public class Pasaje {
 	 *
 	 * @author Daniel Sepúlveda
 	 */
-	public void calcularPrercio() {
+	public void calcularPrecio() {
 		switch (tipo.toLowerCase()) {
 			case "salón cama":
 				precio = 10000f;
@@ -155,5 +155,53 @@ public class Pasaje {
 		} else {
 			System.out.println("No se puede asignar el asiento: ya está ocupado o es inválido.");
 		}
+	}
+
+	public String getIdPasaje() {
+		return idPasaje;
+	}
+
+	public void setIdPasaje(String idPasaje) {
+		this.idPasaje = idPasaje;
+	}
+
+	public Viaje getViaje() {
+		return viaje;
+	}
+
+	public void setViaje(Viaje viaje) {
+		this.viaje = viaje;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Asiento getAsiento() {
+		return asiento;
+	}
+
+	public void setAsiento(Asiento asiento) {
+		this.asiento = asiento;
+	}
+
+	public Float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Float precio) {
+		this.precio = precio;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 }

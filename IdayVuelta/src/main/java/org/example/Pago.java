@@ -1,6 +1,6 @@
 package org.example;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Clase que representa lo relacionado con el pago.
@@ -8,10 +8,10 @@ import java.util.Date;
  */
 public class Pago {
 
-	private String idPago;
+	private int idPago;
 	private Double monto;
-	private String metodoPago;
-	private Date fechaPago;
+	private MetodoPago metodoPago;  // cambié a MetodoPago en lugar de int
+	private LocalDateTime fechaPago;
 
 	/**
 	 * Es el constructor del objeto
@@ -20,28 +20,27 @@ public class Pago {
 	 * @param monto monto del pago
 	 * @param metodoPago metodo del pago
 	 * @param fechaPago fecha del pago
-	 *@return contructor
+	 * @return contructor
 	 */
-	public Pago(String idPago, Double monto, String metodoPago, Date fechaPago){
+	public Pago(int idPago, Double monto, MetodoPago metodoPago, LocalDateTime fechaPago){
 		this.idPago = idPago;
 		this.monto = monto;
-		this.metodoPago = metodoPago;
+		this.metodoPago = metodoPago;  // Cambié aquí
 		this.fechaPago = fechaPago;
-
 	}
 
 	/**
 	 * @author Eduardo Krause
 	 * @return object data
-	 *
 	 */
-	public String getIdPago() {
+	public int getIdPago() {
 		return idPago;
 	}
 
-	public void setIdPago(String idPago) {
+	public void setIdPago(int idPago) {
 		this.idPago = idPago;
 	}
+
 	/**
 	 * @author Eduardo Krause
 	 * @return object data
@@ -53,43 +52,43 @@ public class Pago {
 	public void setMonto(Double monto) {
 		this.monto = monto;
 	}
+
 	/**
 	 * @author Eduardo Krause
 	 * @return object data
 	 */
-	public String getMetodoPago() {
+	public MetodoPago getMetodoPago() {  // Cambié el tipo a MetodoPago
 		return metodoPago;
 	}
 
-	public void setMetodoPago(String metodoPago) {
+	public void setMetodoPago(MetodoPago metodoPago) {  // Cambié aquí también
 		this.metodoPago = metodoPago;
 	}
+
 	/**
 	 * @author Eduardo Krause
 	 * @return object data
 	 */
-	public Date getFechaPago() {
+	public LocalDateTime getFechaPago() {
 		return fechaPago;
 	}
 
-	public void setFechaPago(Date fechaPago) {
+	public void setFechaPago(LocalDateTime fechaPago) {
 		this.fechaPago = fechaPago;
 	}
-
 
 	/**
 	 * @author Eduardo Krause
 	 * @param pago
 	 * @return boolean
-	 * este metodo revisa el procesamiento del pago del boleto
+	 * Este método revisa el procesamiento del pago del boleto
 	 */
 	public boolean procesarPago(Pago pago) {
-		//throw new UnsupportedOperationException();
-		if(verificarPago(pago)){
-			System.out.println("procesando el pago de " +  pago.getMonto() + "con el metodo" + pago.getMetodoPago());
-			System.out.println("pago realizado con exito el"+ pago.getFechaPago() + ". ID de pago: "+ pago.getIdPago());
+		if (verificarPago(pago)) {
+			System.out.println("Procesando el pago de " + pago.getMonto() + " con el método " + pago.getMetodoPago());
+			System.out.println("Pago realizado con éxito el " + pago.getFechaPago() + ". ID de pago: " + pago.getIdPago());
 			return true;
-		}else{
+		} else {
 			System.out.println("Error en los detalles del pago");
 			return false;
 		}
@@ -99,16 +98,14 @@ public class Pago {
 	 * @author Eduardo Krause
 	 * @param pago
 	 * @return boolean
-	 * este metodo se encarga de verificar la existencia correcta del pago,
-	 *
+	 * Este método se encarga de verificar la existencia correcta del pago.
 	 */
 	public boolean verificarPago(Pago pago) {
-		//throw new UnsupportedOperationException();
-		if(pago.getMonto() > 0){
-			if(!pago.getMetodoPago().isEmpty()){
+		if (pago.getMonto() > 0) {
+			if (pago.getMetodoPago() != null) {  // Verificamos si el metodoPago no es null
 				return true;
 			}
-
-		}return false;
+		}
+		return false;
 	}
 }

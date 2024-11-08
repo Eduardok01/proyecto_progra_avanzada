@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Ciudad {
 
-	private int nombreCiudad;
+	private String nombreCiudad;
 	private String region;
 	private List<Viaje> viajes;
 
@@ -20,7 +20,7 @@ public class Ciudad {
 	 * @param nombreCiudad el nombre de la ciudad (representado como un entero).
 	 * @param region       la región donde se encuentra la ciudad.
 	 */
-	public Ciudad(int nombreCiudad, String region) {
+	public Ciudad(String nombreCiudad, String region) {
 		this.nombreCiudad = nombreCiudad;
 		this.region = region;
 		this.viajes = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Ciudad {
 	 *
 	 * @return el nombre de la ciudad como un entero.
 	 */
-	public int getNombreCiudad() {
+	public String getNombreCiudad() {
 		return nombreCiudad;
 	}
 
@@ -40,7 +40,7 @@ public class Ciudad {
 	 *
 	 * @param nombreCiudad el nombre de la ciudad (representado como un entero).
 	 */
-	public void setNombreCiudad(int nombreCiudad) {
+	public void setNombreCiudad(String nombreCiudad) {
 		this.nombreCiudad = nombreCiudad;
 	}
 

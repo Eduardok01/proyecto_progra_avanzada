@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
@@ -129,7 +130,7 @@ public class Viaje {
 	 */
 	public void consultarViaje() {
 
-		System.out.println("Datos del viaje: ");
+		System.out.println("Datos del viaje:\n");
 
 		System.out.println("Origen: " + this.origen.getNombreCiudad());
 		System.out.println("Destino: " + this.destino.getNombreCiudad());

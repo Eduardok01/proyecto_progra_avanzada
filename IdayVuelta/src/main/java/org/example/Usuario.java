@@ -30,7 +30,7 @@ public class Usuario {
 	/**
 	 * Método para ingresar los datos personales del usuario.
 	 */
-	public void ingresaDatosPersonales() {
+	public void ingresaDatosPersonales(String nombre, String rut, String telefono, String email) {
 		// TODO - implement Usuario.ingresaDatosPersonales
 
 		this.nombre = nombre;
@@ -42,7 +42,7 @@ public class Usuario {
 	/**
 	 * Actualizar los datos personales del usuario.
 	 */
-	public void actualizarDatos() {
+	public void actualizarDatos(String nombre, String telefono, String email) {
 		// TODO - implement Usuario.actualizarDatos
 
 		this.nombre = nombre;

@@ -8,6 +8,7 @@ package org.example;
  */
 public class Asiento {
 
+    private Usuario usuario;
     private int numeroAsiento;
     private Boolean estado;
 
@@ -64,7 +65,7 @@ public class Asiento {
      * @return true si el asiento fue reservado con éxito, false si no se pudo reservar.
      * @throws UnsupportedOperationException Método no implementado.
      */
-    public Boolean reservarAsiento() {
+    public Boolean reservarAsiento(Usuario usuario) {
         if (!estado) {
             estado = true;
             return true;
@@ -80,4 +81,6 @@ public class Asiento {
     public void liberarAsiento() {
         estado = false;
     }
+
+
 }
