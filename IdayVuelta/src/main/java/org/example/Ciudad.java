@@ -1,9 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.List;
-
-
-
 
 /**
  * La clase Ciudad representa una ciudad con un nombre y una región.
@@ -12,8 +10,9 @@ import java.util.List;
  */
 public class Ciudad {
 
-	private int nombreCiudad;
+	private String nombreCiudad;
 	private String region;
+	private List<Viaje> viajes;
 
 	/**
 	 * Crea una nueva instancia de la clase Ciudad con un nombre y una región.
@@ -21,9 +20,10 @@ public class Ciudad {
 	 * @param nombreCiudad el nombre de la ciudad (representado como un entero).
 	 * @param region       la región donde se encuentra la ciudad.
 	 */
-	public Ciudad(int nombreCiudad, String region) {
+	public Ciudad(String nombreCiudad, String region) {
 		this.nombreCiudad = nombreCiudad;
 		this.region = region;
+		this.viajes = new ArrayList<>();
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class Ciudad {
 	 *
 	 * @return el nombre de la ciudad como un entero.
 	 */
-	public int getNombreCiudad() {
+	public String getNombreCiudad() {
 		return nombreCiudad;
 	}
 
@@ -40,7 +40,7 @@ public class Ciudad {
 	 *
 	 * @param nombreCiudad el nombre de la ciudad (representado como un entero).
 	 */
-	public void setNombreCiudad(int nombreCiudad) {
+	public void setNombreCiudad(String nombreCiudad) {
 		this.nombreCiudad = nombreCiudad;
 	}
 
@@ -70,8 +70,17 @@ public class Ciudad {
 	 * @throws UnsupportedOperationException si el método no está implementado.
 	 */
 	public void consultarViajes() {
-		// TODO - implement Ciudad.consultarViajes
-		throw new UnsupportedOperationException();
+		if (viajes.isEmpty()) {
+			System.out.println("No hay viajes disponibles desde o hacia esta ciudad.");
+		} else {
+			System.out.println("Viajes disponibles desde o hacia la ciudad:");
+			for (Viaje viaje : viajes) {
+				System.out.println("- Origen: " + viaje.getOrigen().getNombreCiudad() +
+						", Destino: " + viaje.getDestino().getNombreCiudad() +
+						", Fecha: " + viaje.getFechaSalida() +
+						", Hora: " + viaje.getHoraSalida());
+			}
+		}
 	}
 
 	/**
@@ -83,8 +92,17 @@ public class Ciudad {
 	 * @throws UnsupportedOperationException si el método no está implementado.
 	 */
 	public List<Viaje> actualizarDisponibilidad() {
-		// TODO - implement Ciudad.actualizarDisponibilidad
-		throw new UnsupportedOperationException();
+		List<Viaje> viajesConDisponibilidad = new ArrayList<>();
+		for (Viaje viaje : viajes) {
+			List<Asiento> asientosDisponibles = viaje.getBus().verificarDisponibilidadAsientos();
+			if (!asientosDisponibles.isEmpty()) {
+				viajesConDisponibilidad.add(viaje);
+			}
+		}
+		return viajesConDisponibilidad;
 	}
 
+	public void agregarViaje(Viaje viaje) {
+		viajes.add(viaje);
+	}
 }

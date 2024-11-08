@@ -21,13 +21,20 @@ public class Correo {
 	 * @param origen Ciudad de origen.
 	 * @param destino Ciudad de destino.
 	 */
+
+
+	//public Correo(String destinatario, String asunto, String contenido) {
+		//this.destinatario = destinatario;
+		//this.asunto = asunto;
+		//this.contenido = contenido;
+	//}
 	public Correo(String destinatario, String idBus, int numeroAsiento, String fechaSalida, String origen, String destino) {
 		if (destinatario == null || destinatario.isEmpty()) {
-			throw new IllegalArgumentException("El destinatario no puede ser nulo o vacío.");
+			throw new IllegalArgumentException("El destinatario no puede ser nulo.");
 		}
 
 		this.destinatario = destinatario;
-		this.asunto = "Detalles de su pasaje de bus";
+		this.asunto = "Detalles de su pasaje de bus\n";
 		this.contenido = generarContenidoCorreo(idBus, numeroAsiento, fechaSalida, origen, destino);
 	}
 

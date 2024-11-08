@@ -10,7 +10,7 @@ import java.util.List;
  * @author Fernando
  */
 public class Bus {
-	private String idBus;
+	private int idBus;
 	private int capacidad;
 	private List<Asiento> listaAsientos;
 
@@ -20,7 +20,7 @@ public class Bus {
 	 * @param idBus Identificador único del bus.
 	 * @param capacidad Cantidad de asientos que tiene el bus.
 	 */
-	public Bus(String idBus, int capacidad) {
+	public Bus(int idBus, int capacidad) {
 		this.idBus = idBus;
 		this.capacidad = capacidad;
 		this.listaAsientos = new ArrayList<>();
@@ -51,11 +51,11 @@ public class Bus {
 	 * @param numeroAsiento Número del asiento a asignar.
 	 * @return El objeto Asiento asignado, o null si no se puede asignar.
 	 */
-	public Asiento asignarAsiento(int numeroAsiento) {
+	public Asiento asignarAsiento(int numeroAsiento, Usuario usuario) {
 		if (numeroAsiento > 0 && numeroAsiento <= capacidad) {
 			Asiento asiento = listaAsientos.get(numeroAsiento - 1);
 			if (!asiento.getEstado()) {
-				asiento.reservarAsiento();
+				asiento.reservarAsiento(usuario);
 				return asiento;
 			} else {
 				System.out.println("El asiento ya está ocupado.");
@@ -71,7 +71,7 @@ public class Bus {
 	 *
 	 * @return ID del bus.
 	 */
-	public String getIdBus() {
+	public int getIdBus() {
 		return idBus;
 	}
 
@@ -80,7 +80,7 @@ public class Bus {
 	 *
 	 * @param idBus Nuevo identificador del bus.
 	 */
-	public void setIdBus(String idBus) {
+	public void setIdBus(int idBus) {
 		this.idBus = idBus;
 	}
 

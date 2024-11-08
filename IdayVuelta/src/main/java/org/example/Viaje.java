@@ -1,5 +1,6 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
@@ -129,7 +130,7 @@ public class Viaje {
 	 */
 	public void consultarViaje() {
 
-		System.out.println("Datos del viaje: ");
+		System.out.println("Datos del viaje:\n");
 
 		System.out.println("Origen: " + this.origen.getNombreCiudad());
 		System.out.println("Destino: " + this.destino.getNombreCiudad());
@@ -140,15 +141,25 @@ public class Viaje {
 
 	/**
 	 * Actualiza la disponibilidad de los asientos del viaje.
-	 *
+	 * <p>
 	 * Este método aún no está implementado.
 	 *
 	 * @return una lista de asientos disponibles.
 	 * @throws UnsupportedOperationException si el método no está implementado.
 	 */
 	public List<Asiento> actualizarDisponibilidad() {
-		// TODO - implement Viaje.actualizarDisponibilidad
-		throw new UnsupportedOperationException();
-	}
+		//verificar disponibilidad de asientos
+		List<Asiento> asientosDisponibles = bus.verificarDisponibilidadAsientos();
 
+		if (asientosDisponibles.isEmpty()) {
+			System.out.println("No hay asientos disponibles.");
+		} else {
+			System.out.print("Asientos disponibles: ");
+			for (Asiento asiento : asientosDisponibles) {
+				System.out.print(asiento.getNumeroAsiento() + " ");
+			}
+			System.out.println();
+		}
+		return asientosDisponibles;
+	}
 }

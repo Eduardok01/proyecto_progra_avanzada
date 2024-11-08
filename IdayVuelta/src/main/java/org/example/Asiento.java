@@ -8,6 +8,7 @@ package org.example;
  */
 public class Asiento {
 
+    private Usuario usuario;
     private int numeroAsiento;
     private Boolean estado;
 
@@ -19,6 +20,7 @@ public class Asiento {
      */
     public Asiento(int numeroAsiento) {
         this.numeroAsiento = numeroAsiento;
+        this.estado = false;
     }
 
     /**
@@ -63,9 +65,12 @@ public class Asiento {
      * @return true si el asiento fue reservado con éxito, false si no se pudo reservar.
      * @throws UnsupportedOperationException Método no implementado.
      */
-    public Boolean reservarAsiento() {
-        // TODO - implementar la lógica para reservar el asiento
-        throw new UnsupportedOperationException();
+    public Boolean reservarAsiento(Usuario usuario) {
+        if (!estado) {
+            estado = true;
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -74,7 +79,8 @@ public class Asiento {
      * @throws UnsupportedOperationException Método no implementado.
      */
     public void liberarAsiento() {
-        // TODO - implementar la lógica para liberar el asiento
-        throw new UnsupportedOperationException();
+        estado = false;
     }
+
+
 }
