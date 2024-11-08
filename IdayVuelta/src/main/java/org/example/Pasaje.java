@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.Asiento;
-
 /**
  * Esta clase Pasaje representa un ticket de viaje que incluye la información
  * del viaje, asiento, usuario y precio. Además, permite realizar
@@ -61,7 +59,6 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public void cancelarPasaje(){
-		asiento.setEstado(true);
 		this.usuario = null;
 		this.idPasaje = null;
 		System.out.println("El pasaje ha sido cancelado");
@@ -78,7 +75,7 @@ public class Pasaje {
 		System.out.println("Pasaje ID: " + idPasaje);
 		System.out.println("Usuario: " + usuario.getNombre());
 		System.out.println("Viaje : " + viaje.getDestino());
-		System.out.println("Asiento " + asiento.getNumeroAsiento());
+		System.out.println("Asiento " + asiento.getNumero());
 		System.out.println("Precio: $" + precio);
 		System.out.println("Tipo: " + tipo);
 	}
@@ -116,8 +113,8 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public void generarPasaje() {
-
-		throw new UnsupportedOperationException();
+		this.idPasaje = "Id-" + (int) (Math.random() * 99);
+		System.out.println("Pasaje generado: "+ idPasaje);
 	}
 
 	/**
@@ -128,9 +125,16 @@ public class Pasaje {
 	 *
 	 * @author Daniel Sepúlveda
 	 */
-	public void calcularPrercio() {
-
-		throw new UnsupportedOperationException();
+	public void calcularPrecio() {
+		switch (tipo.toLowerCase()) {
+			case "salón cama":
+				precio = 10000f;
+				break;
+			case "semicama":
+				precio = 5000f;
+				break;
+		}
+		System.out.println("El precio del pasaje es: "+ precio);
 	}
 
 	/**
@@ -142,10 +146,58 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public void asignarAsiento() {
-
-		throw new UnsupportedOperationException();
+		if (asiento != null && !asiento.isOcupado()) {
+			System.out.println("El asiento número " + asiento.getNumero() + " ha sido asignado.");
+		} else {
+			System.out.println("No se puede asignar el asiento: ya está ocupado o es inválido.");
+		}
 	}
 
+	public String getIdPasaje() {
+		return idPasaje;
+	}
+
+	public void setIdPasaje(String idPasaje) {
+		this.idPasaje = idPasaje;
+	}
+
+	public Viaje getViaje() {
+		return viaje;
+	}
+
+	public void setViaje(Viaje viaje) {
+		this.viaje = viaje;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Asiento getAsiento() {
+		return asiento;
+	}
+
+	public void setAsiento(Asiento asiento) {
+		this.asiento = asiento;
+	}
+
+	public Float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Float precio) {
+		this.precio = precio;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 }
-
-
