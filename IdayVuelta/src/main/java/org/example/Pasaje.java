@@ -98,11 +98,15 @@ public class Pasaje {
 	 *
 	 * @author Daniel Sepúlveda
 	 */
-	public void registrarPago(Pago pago){
-		if (pago.verificarPago(pago)) {
+	public void registrarPago(Pago pago) {
+		// Ahora verificamos directamente sobre el objeto 'pago'
+		if (pago.verificarPago()) {  // No hace falta pasar el 'pago' como argumento
 			System.out.println("El pago ha sido registrado");
+		} else {
+			System.out.println("El pago no es válido y no puede ser registrado");
 		}
 	}
+
 
 	/**
 	 * Genera un nuevo pasaje.

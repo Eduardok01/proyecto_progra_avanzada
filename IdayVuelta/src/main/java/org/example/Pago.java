@@ -10,29 +10,25 @@ public class Pago {
 
 	private int idPago;
 	private Double monto;
-	private MetodoPago metodoPago;  // cambié a MetodoPago en lugar de int
+	private MetodoPago metodoPago;  // Cambié a MetodoPago en lugar de int
 	private LocalDateTime fechaPago;
 
 	/**
-	 * Es el constructor del objeto
+	 * Constructor de la clase Pago.
 	 *
 	 * @param idPago id del pago
 	 * @param monto monto del pago
 	 * @param metodoPago metodo del pago
 	 * @param fechaPago fecha del pago
-	 * @return contructor
 	 */
-	public Pago(int idPago, Double monto, MetodoPago metodoPago, LocalDateTime fechaPago){
+	public Pago(int idPago, Double monto, MetodoPago metodoPago, LocalDateTime fechaPago) {
 		this.idPago = idPago;
-		this.monto = monto;
-		this.metodoPago = metodoPago;  // Cambié aquí
-		this.fechaPago = fechaPago;
+		setMonto(monto);
+		setMetodoPago(metodoPago);
+		setFechaPago(fechaPago);
 	}
 
-	/**
-	 * @author Eduardo Krause
-	 * @return object data
-	 */
+
 	public int getIdPago() {
 		return idPago;
 	}
@@ -41,71 +37,87 @@ public class Pago {
 		this.idPago = idPago;
 	}
 
-	/**
-	 * @author Eduardo Krause
-	 * @return object data
-	 */
 	public Double getMonto() {
 		return monto;
 	}
 
 	public void setMonto(Double monto) {
+		if (monto == null || monto <= 0) {
+			throw new IllegalArgumentException("El monto debe ser mayor que 0");
+		}
 		this.monto = monto;
 	}
 
-	/**
-	 * @author Eduardo Krause
-	 * @return object data
-	 */
-	public MetodoPago getMetodoPago() {  // Cambié el tipo a MetodoPago
+	public MetodoPago getMetodoPago() {
 		return metodoPago;
 	}
 
-	public void setMetodoPago(MetodoPago metodoPago) {  // Cambié aquí también
+	public void setMetodoPago(MetodoPago metodoPago) {
+		if (metodoPago == null) {
+			throw new IllegalArgumentException("El método de pago no puede ser nulo");
+		}
 		this.metodoPago = metodoPago;
 	}
 
-	/**
-	 * @author Eduardo Krause
-	 * @return object data
-	 */
 	public LocalDateTime getFechaPago() {
 		return fechaPago;
 	}
 
 	public void setFechaPago(LocalDateTime fechaPago) {
+		if (fechaPago != null && fechaPago.isAfter(LocalDateTime.now())) {
+			throw new IllegalArgumentException("La fecha de pago no puede ser en el futuro");
+		}
 		this.fechaPago = fechaPago;
 	}
 
 	/**
-	 * @author Eduardo Krause
-	 * @param pago
-	 * @return boolean
-	 * Este método revisa el procesamiento del pago del boleto
+	 * Método para procesar un pago.
+	 * Este método verifica la validez del pago y luego lo procesa si es válido.
+	 *
+	 * @return true si el pago es procesado correctamente, false si no lo es.
 	 */
-	public boolean procesarPago(Pago pago) {
-		if (verificarPago(pago)) {
-			System.out.println("Procesando el pago de " + pago.getMonto() + " con el método " + pago.getMetodoPago());
-			System.out.println("Pago realizado con éxito el " + pago.getFechaPago() + ". ID de pago: " + pago.getIdPago());
+	public boolean procesarPago() {
+		if (verificarPago()) {
+			mostrarMensajeExito();
 			return true;
 		} else {
-			System.out.println("Error en los detalles del pago");
+			mostrarMensajeError();
 			return false;
 		}
 	}
 
 	/**
-	 * @author Eduardo Krause
-	 * @param pago
-	 * @return boolean
-	 * Este método se encarga de verificar la existencia correcta del pago.
+	 * Verifica que el pago sea válido.
+	 * Este método asegura que el monto sea mayor que 0 y el método de pago no sea nulo.
+	 *
+	 * @return true si el pago es válido, false si no lo es.
 	 */
-	public boolean verificarPago(Pago pago) {
-		if (pago.getMonto() > 0) {
-			if (pago.getMetodoPago() != null) {  // Verificamos si el metodoPago no es null
-				return true;
-			}
-		}
-		return false;
+	public boolean verificarPago() {
+		return monto > 0 && metodoPago != null && fechaPago != null && !fechaPago.isAfter(LocalDateTime.now());
+	}
+
+	/**
+	 * Muestra el mensaje de éxito después de procesar el pago.
+	 */
+	private void mostrarMensajeExito() {
+		System.out.println("Procesando el pago de " + monto + " con el método " + metodoPago);
+		System.out.println("Pago realizado con éxito el " + fechaPago + ". ID de pago: " + idPago);
+	}
+
+	/**
+	 * Muestra el mensaje de error si el pago no es válido.
+	 */
+	private void mostrarMensajeError() {
+		System.out.println("Error en los detalles del pago");
+	}
+
+	/**
+	 * Sobrecarga del método toString para facilitar la impresión de los detalles de un pago.
+	 *
+	 * @return una cadena que representa los detalles del pago.
+	 */
+	@Override
+	public String toString() {
+		return "Pago{idPago=" + idPago + ", monto=" + monto + ", metodoPago=" + metodoPago + ", fechaPago=" + fechaPago + '}';
 	}
 }
