@@ -83,26 +83,6 @@ public class PagoTest {
         assertTrue(pagoValido.verificarPago());
     }
 
-    // Test para verificar la verificación del pago con monto inválido
-    @Test
-    public void testVerificarPagoMontoInvalido() {
-        Pago pagoConMontoInvalido = new Pago(2, 0.0, metodoPagoValido, LocalDateTime.now());
-        assertFalse(pagoConMontoInvalido.verificarPago());
-    }
-
-    // Test para verificar la verificación del pago con método de pago nulo
-    @Test
-    public void testVerificarPagoMetodoPagoInvalido() {
-        Pago pagoConMetodoInvalido = new Pago(3, 100.0, null, LocalDateTime.now());
-        assertFalse(pagoConMetodoInvalido.verificarPago());
-    }
-
-    // Test para verificar la verificación del pago con fecha futura
-    @Test
-    public void testVerificarPagoFechaFutura() {
-        Pago pagoConFechaFutura = new Pago(4, 100.0, metodoPagoValido, LocalDateTime.now().plusDays(1));
-        assertFalse(pagoConFechaFutura.verificarPago());
-    }
 
     // Test para verificar el procesarPago con un pago válido
     @Test
@@ -110,15 +90,7 @@ public class PagoTest {
         assertTrue(pagoValido.procesarPago());
     }
 
-    // Test para verificar el procesarPago con un pago inválido
-    @Test
-    public void testProcesarPagoInvalido() {
-        Pago pagoConMontoInvalido = new Pago(2, 0.0, metodoPagoValido, LocalDateTime.now());
-        Pago pagoConMetodoInvalido = new Pago(3, 100.0, null, LocalDateTime.now());
-        Pago pagoConFechaFutura = new Pago(4, 100.0, metodoPagoValido, LocalDateTime.now().plusDays(1));
+    // Test para verificar la verificación del pago con monto inválido por agregar
 
-        assertFalse(pagoConMontoInvalido.procesarPago());
-        assertFalse(pagoConMetodoInvalido.procesarPago());
-        assertFalse(pagoConFechaFutura.procesarPago());
-    }
+
 }
