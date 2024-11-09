@@ -12,7 +12,7 @@ public class Pasaje {
 	/**
 	 * Identificador único del pasaje comprado.
 	 */
-	private String idPasaje;
+	private int idPasaje;
 
 	/**
 	 * Información del viaje al que corresponde el pasaje.
@@ -48,7 +48,7 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public boolean validarDatos(){
-		return idPasaje != null && viaje != null && asiento != null && usuario != null && precio != null;
+		return idPasaje > 0 && viaje != null && asiento != null && usuario != null && precio != null;
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class Pasaje {
 	 */
 	public void cancelarPasaje(){
 		this.usuario = null;
-		this.idPasaje = null;
+		this.idPasaje = 0;
 		System.out.println("El pasaje ha sido cancelado");
 	}
 
@@ -113,8 +113,8 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public void generarPasaje() {
-		this.idPasaje = "Id-" + (int) (Math.random() * 99);
-		System.out.println("Pasaje generado: "+ idPasaje);
+		this.idPasaje = (int) (Math.random() * 99);
+		System.out.println("Pasaje generado: ID-"+ idPasaje);
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class Pasaje {
 	 *
 	 * @author Daniel Sepúlveda
 	 */
-	public void asignarAsiento() {
+	public void asignarAsiento(Asiento asiento) {
 		if (asiento != null && !asiento.isOcupado()) {
 			System.out.println("El asiento número " + asiento.getNumero() + " ha sido asignado.");
 		} else {
@@ -153,11 +153,11 @@ public class Pasaje {
 		}
 	}
 
-	public String getIdPasaje() {
+	public int getIdPasaje() {
 		return idPasaje;
 	}
 
-	public void setIdPasaje(String idPasaje) {
+	public void setIdPasaje(int idPasaje) {
 		this.idPasaje = idPasaje;
 	}
 
