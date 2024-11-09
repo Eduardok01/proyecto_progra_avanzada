@@ -28,27 +28,13 @@ public class Usuario {
 	}
 
 	/**
-	 * Método para ingresar los datos personales del usuario.
+	 * Actualizar los datos personales del usuario.
 	 */
-	public void ingresaDatosPersonales(String nombre, String rut, String telefono, String email) {
-		// TODO - implement Usuario.ingresaDatosPersonales
-
+	public void actualizarDatos(String nombre, String rut, String telefono, String email) {
 		this.nombre = nombre;
 		this.rut = rut;
 		this.telefono = telefono;
 		this.email = email;
-	}
-
-	/**
-	 * Actualizar los datos personales del usuario.
-	 */
-	public void actualizarDatos(String nombre, String telefono, String email) {
-		// TODO - implement Usuario.actualizarDatos
-
-		this.nombre = nombre;
-		this.telefono = telefono;
-		this.email = email;
-
 		System.out.println("Datos personales actualizados correctamente.");
 	}
 

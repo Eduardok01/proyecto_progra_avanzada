@@ -16,7 +16,7 @@ public class PasajeTest {
         pasaje = new Pasaje();
 
         // Configuración inicial del pasaje
-        pasaje.setIdPasaje("1234");
+        pasaje.setIdPasaje(1234);
         pasaje.setPrecio(5000f);
         pasaje.setTipo("salón cama");
     }
