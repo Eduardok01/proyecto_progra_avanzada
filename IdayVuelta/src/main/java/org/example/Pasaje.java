@@ -1,5 +1,8 @@
 package org.example;
 
+import java.util.Map;
+import java.util.Optional;
+
 /**
  * Esta clase Pasaje representa un ticket de viaje que incluye la información
  * del viaje, asiento, usuario y precio. Además, permite realizar
@@ -47,8 +50,51 @@ public class Pasaje {
 	 *
 	 * @author Daniel Sepúlveda
 	 */
-	public boolean validarDatos(){
-		return idPasaje > 0 && viaje != null && asiento != null && usuario != null && precio != null;
+
+	private static final Map<String, Float> PRECIOS_POR_TIPO = Map.of(
+			"salón cama", 10000f,
+			"semicama", 5000f
+	);
+
+	public Pasaje(int idPasaje, Viaje viaje, Asiento asiento, Usuario usuario, Float precio, String tipo) {
+		this.idPasaje = idPasaje;
+		this.viaje = viaje;
+		this.asiento = asiento;
+		this.usuario = usuario;
+		this.precio = precio;
+		this.tipo = tipo;
+	}
+
+	private boolean idPasajeValido() {
+		return idPasaje > 0;
+	}
+
+	private boolean viajeValido() {
+		return viaje != null;
+	}
+
+	private boolean asientoValido() {
+		return asiento != null;
+	}
+
+	private boolean usuarioValido() {
+		return usuario != null;
+	}
+
+	private boolean precioValido() {
+		return precio != null;
+	}
+
+	/**
+	 * Valida que los datos del pasaje estén completos.
+	 *
+	 * @return	{@code true} si todos los campos requeridos ya sean idPasaje, viaje, asiento,
+	 * 			usuario, precio} están presentes, de lo contrario {@code false}.
+	 *
+	 * @author Daniel Sepúlveda
+	 */
+	public boolean validarDatos() {
+		return idPasajeValido() && viajeValido() && asientoValido() && usuarioValido() && precioValido();
 	}
 
 	/**
@@ -58,10 +104,10 @@ public class Pasaje {
 	 *
 	 * @author Daniel Sepúlveda
 	 */
-	public void cancelarPasaje(){
+	public void cancelarPasaje() {
 		this.usuario = null;
 		this.idPasaje = 0;
-		System.out.println("El pasaje ha sido cancelado");
+		imprimirMensaje("El pasaje ha sido cancelado");
 	}
 
 	/**
@@ -71,13 +117,13 @@ public class Pasaje {
 	 *
 	 * @author Daniel Sepúlveda
 	 */
-	public void mostrarDetalles(){
-		System.out.println("Pasaje ID: " + idPasaje);
-		System.out.println("Usuario: " + usuario.getNombre());
-		System.out.println("Viaje : " + viaje.getDestino());
-		System.out.println("Asiento " + asiento.getNumero());
-		System.out.println("Precio: $" + precio);
-		System.out.println("Tipo: " + tipo);
+	public void mostrarDetalles() {
+		imprimirMensaje("Pasaje ID: " + idPasaje);
+		imprimirMensaje("Usuario: " + usuario.getNombre());
+		imprimirMensaje("Viaje : " + viaje.getDestino());
+		imprimirMensaje("Asiento: " + asiento.getNumero());
+		imprimirMensaje("Precio: $" + precio);
+		imprimirMensaje("Tipo: " + tipo);
 	}
 
 	/**
@@ -87,7 +133,7 @@ public class Pasaje {
 	 *
 	 * @author Daniel Sepúlveda
 	 */
-	public void actualizarTipo(String nuevoTipo){
+	public void actualizarTipo(String nuevoTipo) {
 		this.tipo = nuevoTipo;
 	}
 
@@ -98,23 +144,10 @@ public class Pasaje {
 	 *
 	 * @author Daniel Sepúlveda
 	 */
-	public void registrarPago(Pago pago){
+	public void registrarPago(Pago pago) {
 		if (pago.verificarPago(pago)) {
-			System.out.println("El pago ha sido registrado");
+			imprimirMensaje("El pago ha sido registrado");
 		}
-	}
-
-	/**
-	 * Genera un nuevo pasaje.
-	 * No está implementado aún.
-	 *
-	 * @throws UnsupportedOperationException siempre, ya que no está implementado.
-	 *
-	 * @author Daniel Sepúlveda
-	 */
-	public void generarPasaje() {
-		this.idPasaje = (int) (Math.random() * 99);
-		System.out.println("Pasaje generado: ID-"+ idPasaje);
 	}
 
 	/**
@@ -126,15 +159,12 @@ public class Pasaje {
 	 * @author Daniel Sepúlveda
 	 */
 	public void calcularPrecio() {
-		switch (tipo.toLowerCase()) {
-			case "salón cama":
-				precio = 10000f;
-				break;
-			case "semicama":
-				precio = 5000f;
-				break;
+		if (tipo != null && PRECIOS_POR_TIPO.containsKey(tipo.toLowerCase())) {
+			precio = PRECIOS_POR_TIPO.get(tipo.toLowerCase());
+			imprimirMensaje("El precio del pasaje es: " + precio);
+		} else {
+			throw new UnsupportedOperationException("Tipo de pasaje no soportado");
 		}
-		System.out.println("El precio del pasaje es: "+ precio);
 	}
 
 	/**
@@ -147,57 +177,29 @@ public class Pasaje {
 	 */
 	public void asignarAsiento(Asiento asiento) {
 		if (asiento != null && !asiento.isOcupado()) {
-			System.out.println("El asiento número " + asiento.getNumero() + " ha sido asignado.");
+			imprimirMensaje("El asiento número " + asiento.getNumero() + " ha sido asignado.");
 		} else {
-			System.out.println("No se puede asignar el asiento: ya está ocupado o es inválido.");
+			imprimirMensaje("No se puede asignar el asiento: ya está ocupado o es inválido.");
 		}
+	}
+
+	private void imprimirMensaje(String mensaje) {
+		System.out.println(mensaje);
 	}
 
 	public int getIdPasaje() {
 		return idPasaje;
 	}
 
-	public void setIdPasaje(int idPasaje) {
-		this.idPasaje = idPasaje;
+	public Optional<Usuario> getUsuario() {
+		return Optional.ofNullable(usuario);
 	}
 
-	public Viaje getViaje() {
-		return viaje;
+	public Optional<Float> getPrecio() {
+		return Optional.ofNullable(precio);
 	}
 
-	public void setViaje(Viaje viaje) {
-		this.viaje = viaje;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public Asiento getAsiento() {
-		return asiento;
-	}
-
-	public void setAsiento(Asiento asiento) {
-		this.asiento = asiento;
-	}
-
-	public Float getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(Float precio) {
-		this.precio = precio;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public Optional<String> getTipo() {
+		return Optional.ofNullable(tipo);
 	}
 }
