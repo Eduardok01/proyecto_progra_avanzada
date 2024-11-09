@@ -49,11 +49,11 @@ public class Correo {
 	 * @return Contenido formateado del correo.
 	 */
 	private String generarContenidoCorreo(String idBus, int numeroAsiento, String fechaSalida, String origen, String destino) {
-		return "¡Gracias por viajar con nosotros!, \n\n" +
+		return "¡Gracias por viajar con nosotros!, \n" +
 				"Aquí están los detalles de su pasaje de bus:\n" +
 				"Bus: " + idBus + "\n" +
 				"Asiento: " + numeroAsiento + "\n" +
-				"Fecha y ora de salida: " + fechaSalida + "\n" +
+				"Fecha y hora de salida: " + fechaSalida + "\n" +
 				"Origen: " + origen + "\n" +
 				"Destino: " + destino;
 	}
