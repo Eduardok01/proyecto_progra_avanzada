@@ -41,4 +41,9 @@ public class Ciudad {
 	public String getRegion() {
 		return region;
 	}
+
+	@Override
+	public String toString() {
+		return nombre + ", " + region;
+	}
 }
