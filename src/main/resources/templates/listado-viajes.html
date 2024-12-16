@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Viajes</title>
+</head>
+<body>
+<h1>Listado de Viajes</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Origen</th>
+        <th>Destino</th>
+        <th>Salida</th>
+        <th>Precio</th>
+        <th>Asientos Disponibles</th>
+        <th>Seleccionar Asiento</th>
+        <th>Comprar</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="viaje : ${viajes}">
+        <td th:text="${viaje.origen}"></td>
+        <td th:text="${viaje.destino}"></td>
+        <td th:text="${#temporals.format(viaje.salida, 'dd/MM/yyyy HH:mm')}"></td>
+        <td th:text="${viaje.precio}"></td>
+        <td th:text="${viajeService.numAsientosDisponiblesViaje(viaje)}"></td>
+        <td>
+            <label>
+                <select th:id="'asiento_' + ${viaje.id}">
+                    <option th:each="asiento : ${viajeService.getAsientosDisponibles(viaje)}"
+                            th:value="${asiento.id}"
+                            th:text="${asiento.numero}">
+                    </option>
+                </select>
+            </label>
+        </td>
+        <td>
+            <button th:onclick="'comprarAsiento(' + ${viaje.id} + ', this)'">Comprar</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
