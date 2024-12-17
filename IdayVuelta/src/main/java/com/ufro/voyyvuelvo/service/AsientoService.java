@@ -16,6 +16,10 @@ public class AsientoService {
     @Autowired
     private AsientoRepository asientoRepository;
 
+    public Asiento findById(Long id) {
+        return asientoRepository.findById(id).orElse(null);
+    }
+
     public List<Asiento> agruparPorViaje(Viaje viaje) {
         List<Asiento> asientosViaje = new ArrayList<>();
         List<Asiento> asientosRegistrados = asientoRepository.findAll();

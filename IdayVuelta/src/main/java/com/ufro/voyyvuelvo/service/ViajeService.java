@@ -29,6 +29,10 @@ public class ViajeService {
         return viajeRepository.findAll();
     }
 
+    public Viaje findById(Long id) {
+        return viajeRepository.findById(id).orElse(null);
+    }
+
     public int numAsientosDisponiblesViaje(Viaje viaje) {
         int disponibles = 0;
         List<Asiento> asientos = asientoService.agruparPorViaje(viaje);

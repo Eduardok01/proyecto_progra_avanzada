@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Compra de pasaje</title>
+</head>
+<body>
+    <h1>Detalles de la Compra</h1>
+
+    <p><b>Viaje:</b></p>
+    <ul>
+        <li>Origen: <span th:text="${viajeService.findById(viajeId).origen}"></span></li>
+        <li>Destino: <span th:text="${viajeService.findById(viajeId).destino}"></span></li>
+        <li>Fecha de salida: <span th:text="${#temporals.format(viajeService.findById(viajeId).salida, 'dd/MM/yyyy HH:mm')}"></span></li>
+    </ul>
+    <p><b>Asiento:</b></p>
+    <ul>
+        <li>Numero de asiento: <span th:text="${asientoService.findById(asientoId).numero}"></span></li>
+    </ul>
+    <p><b>Confirmar Compra:</b></p>
+    <ul>
+        <li>Precio: <span th:text="'$' + ${viajeService.findById(viajeId).precio}"></span></li>
+        <li>Titular Pasaje: <span th:text="${usuario.email}"></span></li>
+        <button>Comprar</button>
+    </ul>
+
+
+</body>
+</html>
