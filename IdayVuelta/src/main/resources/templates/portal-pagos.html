@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Portal de Pagos</title>
+</head>
+
+<body>
+  <h1>Portal de Pagos</h1>
+  <p>Monto a pagar: $<span th:text="${monto}"></span></p>
+  <form th:action="@{/procesarPago}" method="POST">
+    <label for="metodoPago">Medio de pago:</label>
+    <select id="metodoPago" name="metodoPago">
+      <option th:each="metodo : ${mediosPago}" th:value="${metodo}" th:text="${metodo}">
+      </option>
+    </select>
+    <br>
+    <button type="submit">Realizar Pago</button>
+  </form>
+</body>
+
+</html>

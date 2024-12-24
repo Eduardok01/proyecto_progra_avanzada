@@ -1,43 +1,36 @@
 package com.ufro.voyyvuelvo.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Entity
+@Data
+@RequiredArgsConstructor // Constructor con parámetros de los campos final o @NonNull
 public class Pasaje {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @OneToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
-    @OneToOne
-    @JoinColumn(name = "asiento_id")
+    @JoinColumn(name = "asiento_id", nullable = false, unique = true) // FK única hacia Asiento
+    @NonNull
     private Asiento asiento;
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false) // FK hacia Usuario
+    @NonNull
+    private Usuario usuario;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @NonNull
+    private LocalDateTime fechaCompra;
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    public Pasaje() {
 
-    public Asiento getAsiento() {
-        return asiento;
-    }
-
-    public void setAsiento(Asiento asiento) {
-        this.asiento = asiento;
     }
 }

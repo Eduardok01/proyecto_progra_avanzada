@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pago Confirmado</title>
+</head>
+
+<body>
+    <h1>¡Pago realizado con éxito!</h1>
+    <p>Tu pasaje ha sido generado.</p>
+    <p>El pasaje se ha enviado a la direccion de correo: <span th:text="${usuario.email}"></span></p>
+
+    <a th:href="@{/viajes}">Volver al listado de viajes</a>
+    <a th:href="@{usuarios/logout}">Cerrar sesión</a>
+</body>
+
+</html>

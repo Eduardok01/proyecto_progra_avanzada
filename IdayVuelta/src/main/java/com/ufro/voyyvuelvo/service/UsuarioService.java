@@ -2,7 +2,6 @@ package com.ufro.voyyvuelvo.service;
 
 import com.ufro.voyyvuelvo.model.Usuario;
 import com.ufro.voyyvuelvo.repository.UsuarioRepository;
-import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     public Usuario registrarUsuario(Usuario usuario) {
-        if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+        if (usuarioRepository.existsByEmail(usuario.getEmail()) || usuarioRepository.existsByRut(usuario.getRut())) {
             throw new IllegalArgumentException("Usuario ya existe");
         }
         logger.info("Nuevo usuario registrado con exito");
@@ -34,7 +33,4 @@ public class UsuarioService {
         return null;
     }
 
-    public Usuario findByEmail(String email) {
-        return usuarioRepository.findByEmail(email);
-    }
 }

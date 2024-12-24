@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalle del Usuario</title>
+</head>
+<body>
+<h1>Detalle del Usuario</h1>
+
+<div>
+    <h2>Información del Usuario</h2>
+    <p><strong>Email:</strong> <span th:text="${usuario.email}"></span></p>
+    <p><strong>RUT:</strong> <span th:text="${usuario.rut}"></span></p>
+</div>
+
+<div>
+    <h2>Pasajes Comprados</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>N° Asiento</th>
+            <th>Origen</th>
+            <th>Destino</th>
+            <th>Fecha de Salida</th>
+            <th>Fecha de Compra</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pasaje : ${pasajes}">
+            <td th:text="${pasaje.asiento.numero}"></td>
+            <td th:text="${pasaje.asiento.viaje.origen}"></td>
+            <td th:text="${pasaje.asiento.viaje.destino}"></td>
+            <td th:text="${pasaje.asiento.viaje.salida}"></td>
+            <td th:text="${pasaje.fechaCompra}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a href="/viajes"><button>Listado de viajes</button></a>
+</body>
+</html>

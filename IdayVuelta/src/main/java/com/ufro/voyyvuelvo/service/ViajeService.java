@@ -1,6 +1,5 @@
 package com.ufro.voyyvuelvo.service;
 
-
 import com.ufro.voyyvuelvo.model.Asiento;
 import com.ufro.voyyvuelvo.model.Viaje;
 
@@ -10,9 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 
 @Service
 public class ViajeService {
@@ -34,25 +32,14 @@ public class ViajeService {
     }
 
     public int numAsientosDisponiblesViaje(Viaje viaje) {
-        int disponibles = 0;
-        List<Asiento> asientos = asientoService.agruparPorViaje(viaje);
-        for(Asiento asiento : asientos) {
-            if (asiento.getDisponible()){
-                disponibles++;
-            }
-        }
-        return disponibles;
+        return getAsientosDisponibles(viaje).size();
     }
 
     public List<Asiento> getAsientosDisponibles(Viaje viaje) {
-        List<Asiento> asientosDisponibles = new ArrayList<>();
-        List<Asiento> asientosViaje = asientoService.agruparPorViaje(viaje);
-        for(Asiento asiento : asientosViaje) {
-            if (asiento.getDisponible()){
-                asientosDisponibles.add(asiento);
-            }
-        }
-        return asientosDisponibles;
+        return asientoService.agruparPorViaje(viaje)
+                .stream()
+                .filter(Asiento::getDisponible)
+                .collect(Collectors.toList());
     }
 
 }

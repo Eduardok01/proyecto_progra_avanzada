@@ -1,8 +1,12 @@
 package com.ufro.voyyvuelvo.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.List;
 
 @Entity
+@Data
 public class Usuario {
 
     @Id
@@ -12,30 +16,13 @@ public class Usuario {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(unique = true, nullable = false)
+    private String rut;
+
     @Column(nullable = false)
     private String contrasena;
 
-    public Long getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL) // Relación con Pasaje
+    private List<Pasaje> pasajes;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
 }

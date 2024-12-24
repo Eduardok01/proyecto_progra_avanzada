@@ -1,8 +1,10 @@
 package com.ufro.voyyvuelvo.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class Asiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -10,37 +12,9 @@ public class Asiento {
     private Integer numero;
     private Boolean disponible;
     @ManyToOne
+    @JoinColumn(name = "viaje_id", nullable = false) // FK hacia Viaje
     private Viaje viaje;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
-
-    public Boolean getDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(Boolean disponible) {
-        this.disponible = disponible;
-    }
-
-    public Viaje getViaje() {
-        return viaje;
-    }
-
-    public void setViaje(Viaje viaje) {
-        this.viaje = viaje;
-    }
+    @OneToOne(mappedBy = "asiento", cascade = CascadeType.ALL) // Relación con Pasaje
+    private Pasaje pasaje;
 }

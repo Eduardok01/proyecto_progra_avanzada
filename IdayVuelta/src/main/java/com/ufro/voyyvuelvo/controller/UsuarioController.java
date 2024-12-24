@@ -1,14 +1,19 @@
 package com.ufro.voyyvuelvo.controller;
 
+import com.ufro.voyyvuelvo.model.Pasaje;
 import com.ufro.voyyvuelvo.model.Usuario;
+import com.ufro.voyyvuelvo.service.PasajeService;
 import com.ufro.voyyvuelvo.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -17,12 +22,15 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @Autowired
+    private PasajeService pasajeService;
+
     @PostMapping("/registrar")
     public String guardarUsuario(Usuario usuario, Model model) {
         try {
             usuarioService.registrarUsuario(usuario);
             return "redirect:/";
-        } catch (IllegalArgumentException e) {
+        } catch (Exception e) {
             model.addAttribute("error", "Usuario ya se encuentra registrado");
             return "registro-usuario";
         }
@@ -43,6 +51,32 @@ public class UsuarioController {
             model.addAttribute("error", "Correo o contraseña incorrectos");
             return "inicio-sesion";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/"; // Redirige a la página de inicio de sesión
+    }
+
+    @GetMapping("/detalle")
+    public String detalleUsuario(HttpSession session, Model model) {
+        // Obtener el usuario de la sesión
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogeado");
+
+        // Verificar si el usuario está logeado
+        if (usuario == null) {
+            return "redirect:/login"; // Redirigir al login si no está autenticado
+        }
+
+        // Obtener los pasajes comprados por el usuario
+        List<Pasaje> pasajes = pasajeService.obtenerPasajesPorUsuario(usuario);
+
+        // Pasar los datos al modelo
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("pasajes", pasajes);
+
+        return "usuario-detalle";
     }
 
 }
