@@ -1,12 +1,16 @@
 package com.ufro.voyyvuelvo.service;
 
 import com.ufro.voyyvuelvo.model.Pasaje;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+
 
 @Service
 public class EmailSenderService {
@@ -14,23 +18,29 @@ public class EmailSenderService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendEmail(Pasaje pasaje) {
-        SimpleMailMessage message = new SimpleMailMessage();
+    public void enviarEmail(Pasaje pasaje, File pdfFile) {
 
-        message.setFrom("voyyvuelvocomprapasajes@gmail.com");
-        message.setTo(pasaje.getUsuario().getEmail());
-        message.setSubject("Compra pasaje VoyYVuelvo");
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        message.setText(
-                "Origen:" + pasaje.getAsiento().getViaje().getOrigen() + "\n" +
-                "Destino:" + pasaje.getAsiento().getViaje().getOrigen() + "\n" +
-                "Salida:" + pasaje.getAsiento().getViaje().getOrigen() + "\n" +
-                "Numero Asiento:" + pasaje.getAsiento().getNumero() + "\n" +
-                "Titular Pasaje: " + pasaje.getUsuario().getRut()
-        );
+            helper.setFrom("voyyvuelvocomprapasajes@gmail.com");
+            helper.setTo(pasaje.getUsuario().getEmail());
+            helper.setSubject("Pasaje VoyYVuelvo");
+            helper.setText("Pasaje Adjunto", true);
 
-        mailSender.send(message);
+            helper.addAttachment(pdfFile.getName(), pdfFile);
+
+            mailSender.send(message);
+            pdfFile.delete();
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+
     }
+
+
 
 
 }

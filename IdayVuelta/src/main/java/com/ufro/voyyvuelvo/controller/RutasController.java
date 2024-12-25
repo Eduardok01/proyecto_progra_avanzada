@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -47,20 +48,27 @@ public class RutasController {
 
     @GetMapping("/viajes")
     public String mostrarViajes(HttpSession session, Model model){
-        if(session.getAttribute("usuarioLogeado") != null){
-            model.addAttribute("viajes", viajeService.findAll());
-            model.addAttribute("viajeService", viajeService);
-            return "listado-viajes";
-        } else {
+        if (session.getAttribute("usuarioLogeado")== null) {
             return "redirect:/";
         }
+
+        model.addAttribute("viajes", viajeService.findAll());
+        model.addAttribute("viajeService", viajeService);
+        return "listado-viajes";
+
     }
 
     @PostMapping("/pagar")
     public String mostrarFormularioPago(
             @RequestParam Integer monto,
             @RequestParam Long asientoId,
-            Model model) {
+            Model model,
+            HttpSession session) {
+
+        if (session.getAttribute("usuarioLogeado")== null) {
+            return "redirect:/";
+        }
+
         List<String> mediosPago = Arrays.asList("Credito", "Debito");
         model.addAttribute("monto", monto);
         model.addAttribute("mediosPago", mediosPago);
@@ -73,21 +81,24 @@ public class RutasController {
                                 @RequestParam("asientoId") Long asientoId,
                                 HttpSession session,
                                 Model model) {
-        if(session.getAttribute("usuarioLogeado") != null){
-            model.addAttribute("viajeId", viajeId);
-            model.addAttribute("asientoId", asientoId);
-            model.addAttribute("viajeService", viajeService);
-            model.addAttribute("asientoService", asientoService);
-            model.addAttribute("usuario", session.getAttribute("usuarioLogeado"));
-            session.setAttribute("idPasajeComprar", asientoId);
-            return "resumen-compra";
-        } else {
+        if (session.getAttribute("usuarioLogeado")== null) {
             return "redirect:/";
         }
+        model.addAttribute("viajeId", viajeId);
+        model.addAttribute("asientoId", asientoId);
+        model.addAttribute("viajeService", viajeService);
+        model.addAttribute("asientoService", asientoService);
+        model.addAttribute("usuario", session.getAttribute("usuarioLogeado"));
+        session.setAttribute("idPasajeComprar", asientoId);
+        return "resumen-compra";
     }
 
     @PostMapping("/procesarPago")
     public String procesarPago(HttpSession session, Model model) {
+
+        if (session.getAttribute("usuarioLogeado")== null) {
+            return "redirect:/";
+        }
 
         model.addAttribute("usuario", session.getAttribute("usuarioLogeado"));
 
@@ -98,9 +109,11 @@ public class RutasController {
 
         Pasaje pasaje = new Pasaje(asiento, usuario, LocalDateTime.now());
 
+        File pasajePdf = pasajeService.generarPdfPasaje(pasaje);
+
         asientoService.marcarAsientoOcupado(asientoId);
         pasajeService.guardarPasaje(pasaje);
-        emailSenderService.sendEmail(pasaje);
+        emailSenderService.enviarEmail(pasaje, pasajePdf);
 
         return "pago-confirmado";
     }

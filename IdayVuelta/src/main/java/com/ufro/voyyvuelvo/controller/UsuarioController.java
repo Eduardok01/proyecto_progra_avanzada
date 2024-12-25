@@ -46,7 +46,7 @@ public class UsuarioController {
 
         if (usuario!= null) {
             session.setAttribute("usuarioLogeado", usuario);
-            return "redirect:/viajes";
+            return "redirect:/";
         } else {
             model.addAttribute("error", "Correo o contraseña incorrectos");
             return "inicio-sesion";
@@ -56,23 +56,19 @@ public class UsuarioController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/"; // Redirige a la página de inicio de sesión
+        return "redirect:/";
     }
 
     @GetMapping("/detalle")
     public String detalleUsuario(HttpSession session, Model model) {
-        // Obtener el usuario de la sesión
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogeado");
 
-        // Verificar si el usuario está logeado
-        if (usuario == null) {
-            return "redirect:/login"; // Redirigir al login si no está autenticado
+        if (session.getAttribute("usuarioLogeado")== null) {
+            return "redirect:/";
         }
 
-        // Obtener los pasajes comprados por el usuario
         List<Pasaje> pasajes = pasajeService.obtenerPasajesPorUsuario(usuario);
 
-        // Pasar los datos al modelo
         model.addAttribute("usuario", usuario);
         model.addAttribute("pasajes", pasajes);
 

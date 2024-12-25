@@ -11,6 +11,7 @@ public class Asiento {
     private Long id;
     private Integer numero;
     private Boolean disponible;
+
     @ManyToOne
     @JoinColumn(name = "viaje_id", nullable = false) // FK hacia Viaje
     private Viaje viaje;
